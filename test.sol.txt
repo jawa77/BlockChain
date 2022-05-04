@@ -1,0 +1,67 @@
+// SPDX-License-Identifier: MIT
+pragma solidity 0.8.7;
+
+contract SolidityTest {
+
+  //  uint public myint;
+  
+  string public mystr="hello world";
+  uint public constant it=65;
+  address public myaddr;
+   uint public iData= 10;
+   int public igh=5;
+
+        constructor() {
+            
+            myaddr=address(45);
+        }
+
+        error  Myer(string st);
+
+    function err(uint i1) public pure{
+      //  require(i1<10,"your value is greater than 10");
+      //  return 23;
+        if(i1>10){
+            revert Myer("wel come to error");
+        }
+
+    }
+
+  function add() public pure returns (uint) {
+     uint a=40;
+     uint b=70;
+     uint res=a+b;
+     return res;
+  }
+    function getResult() public pure returns(uint){
+      uint a = 1; // local variable
+      uint b = 2;
+      uint result = a + b;
+     // globVar();
+      return result; //access the local variable
+   }
+
+   function globVar() external view returns(address,uint,uint){
+       address sedr=msg.sender;
+
+       uint times=block.timestamp;
+       uint blo=block.number;
+       return(sedr,times,blo);
+
+   }
+
+function ifElse(uint xtra)public pure returns(uint){
+    if(xtra<10){
+        return 1;
+    }else if(xtra>=10){
+        return 2;
+    }else{
+        return 3;
+    }
+
+    
+    
+    
+}
+
+}
