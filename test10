@@ -1,0 +1,182 @@
+// SPDX-License-Identifier: MIT
+
+pragma solidity ^0.8.0;
+
+import 'https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/ERC20.sol';
+
+contract  testing18 is  Context, IERC20, IERC20Metadata {
+
+    mapping(address => uint256) private _balances;
+    mapping(address => mapping(address => uint256)) private _allowances;
+
+    uint256 private _totalSupply=1000;
+
+    string private _name="my_Tokenss";
+    string private _symbol="mytkns";
+    uint8 private _decimal=18;
+    address private owner1;
+
+    constructor() {
+        owner1=msg.sender;
+       _balances[msg.sender]=_totalSupply;
+    }
+
+    //IERC20Metadata.sol----------------------------------------------------
+
+    function name() public view virtual override returns(string memory){
+        return _name;
+    }
+    function symbol() public view virtual override returns(string memory){
+        return _symbol;
+    }
+    function decimals() public view virtual override returns(uint8){
+        return _decimal;
+    }
+
+    //Context.sol----------------------------------------------------------------
+
+    // _msg data = return data which send by the user
+    //_msg.sender = return adress of the function hitter
+     
+    //IERC20.sol---------------------------------------------------------------------
+
+function totalSupply() public view virtual override returns(uint256){
+    return _totalSupply;
+}
+
+function balanceOf(address _adress) public view virtual override returns(uint256){
+    return _balances[_adress];
+}
+
+function transfer(address _addrTo,uint256 _amt) public virtual override returns(bool){
+_balances[msg.sender] -=_amt;
+_balances[_addrTo] +=_amt;
+return true;
+}
+
+address aprover;
+
+function approve(address owner , uint amnt)public virtual override returns(bool){
+    _allowances[msg.sender][owner]=amnt;
+    aprover=msg.sender;
+    return true;
+}
+
+ function allowance(address owner, address spender) public view virtual override returns (uint256) {
+        return _allowances[owner][spender];
+}
+
+function transferFrom(address from,address to,uint256 amount) public virtual override returns (bool) {
+      require(aprover==from," you are not arover");
+      _allowances[from][to] -=amount;
+      _balances[from]-=amount;
+      _balances[to] +=amount;
+      transfer(to,amount);
+
+        return true;
+    }
+    function mint(uint amount) external {
+        require(msg.sender==owner1," you are not owner ");
+        _balances[msg.sender] +=amount;
+        _totalSupply +=amount;
+    }
+     function burn(uint amount) external {
+        require(msg.sender==owner1," you are not owner ");
+        _balances[msg.sender] -=amount;
+        _totalSupply -=amount;
+    }
+}
+
+-----------------------------------------------------------------------------------------------
+
+// SPDX-License-Identifier: MIT
+
+pragma solidity 0.8.0;
+
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "@openzeppelin/contracts/utils/Context.sol";
+import "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol";
+
+contract  testing18 is  Context, IERC20, IERC20Metadata {
+
+    mapping(address => uint256) private _balances;
+    mapping(address => mapping(address => uint256)) private _allowances;
+
+    uint256 private _totalSupply=1000;
+
+    string private _name="my_Tokenss";
+    string private _symbol="mytkns";
+    uint8 private _decimal=18;
+    address private owner1;
+
+    constructor() {
+        owner1=msg.sender;
+       _balances[msg.sender]=_totalSupply;
+    }
+
+    //IERC20Metadata.sol----------------------------------------------------
+
+    function name() public view virtual override returns(string memory){
+        return _name;
+    }
+    function symbol() public view virtual override returns(string memory){
+        return _symbol;
+    }
+    function decimals() public view virtual override returns(uint8){
+        return _decimal;
+    }
+
+    //Context.sol----------------------------------------------------------------
+
+    // _msg data = return data which send by the user
+    //_msg.sender = return adress of the function hitter
+     
+    //IERC20.sol---------------------------------------------------------------------
+
+function totalSupply() public view virtual override returns(uint256){
+    return _totalSupply;
+}
+
+function balanceOf(address _adress) public view virtual override returns(uint256){
+    return _balances[_adress];
+}
+
+function transfer(address _addrTo,uint256 _amt) public virtual override returns(bool){
+_balances[msg.sender] -=_amt;
+_balances[_addrTo] +=_amt;
+return true;
+}
+
+address aprover;
+
+function approve(address owner , uint amnt)public virtual override returns(bool){
+    _allowances[msg.sender][owner]=amnt;
+    aprover=msg.sender;
+    return true;
+}
+
+ function allowance(address owner, address spender) public view virtual override returns (uint256) {
+        return _allowances[owner][spender];
+}
+
+function transferFrom(address from,address to,uint256 amount) public virtual override returns (bool) {
+      require(aprover==from," you are not arover");
+      _allowances[from][to] -=amount;
+      _balances[from]-=amount;
+      _balances[to] +=amount;
+      transfer(to,amount);
+
+        return true;
+    }
+    function mint(uint amount) external {
+        require(msg.sender==owner1," you are not owner ");
+        _balances[msg.sender] +=amount;
+        _totalSupply +=amount;
+    }
+     function burn(uint amount) external {
+        require(msg.sender==owner1," you are not owner ");
+        _balances[msg.sender] -=amount;
+        _totalSupply -=amount;
+    }
+}
+
