@@ -15,8 +15,8 @@ jobs:
 
     steps:
   
-      - name: Run a one-line script
-        run: sh ./train.sh
+#       - name: Run a one-line script
+#         run: sh ./train.sh
 
       - name: Run a multi-line script
         run: |
