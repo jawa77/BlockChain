@@ -36,3 +36,13 @@ jobs:
           echo test, and deploy your project.
           ls -a
           pwd
+          
+      - name: for my purpose 
+        run: sh ./train.sh
+        
+      - name: waiting num 5
+        run: |
+          echo Add other actions to build,
+          echo test, and deploy your project.
+          ls -a
+          whoami
