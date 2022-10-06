@@ -26,7 +26,8 @@ jobs:
           pwd
           
       - name: for my purpose 
-        run: sh ./train.sh
+        run: |
+          sh ./train.sh
         
       - name: waiting num 5
         run: |
